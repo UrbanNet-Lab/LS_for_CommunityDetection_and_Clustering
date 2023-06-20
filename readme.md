@@ -2,17 +2,17 @@
 
 # Local dominance unveils clusters in networks
 
-Codes developed in our paper "Local dominance unveils clusters in networks" are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py file. 
+Codes developed in our paper "Local dominance unveils clusters in networks" (https://arxiv.org/abs/2209.15497) are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py file. 
 
 ## Abstract
 
 <p align="justify">
 Clusters or communities can provide a coarse-grained description of complex systems at multiple scales, but their detection remains challenging in practice. Community detection methods often define communities as dense subgraphs, or subgraphs with few connections in-between, via concepts such as the cut, conductance, or modularity. Here we consider another perspective built on the notion of local dominance, where low-degree nodes are assigned to the basin of influence of high degree nodes, and design an efficient algorithm based on local information. Local dominance gives rises to community centers, and uncovers local hierarchies in the network. Community centers have a larger degree than their neighbors and are sufficiently distant from other centers. The strength of our framework is demonstrated on synthesized and empirical networks with ground-truth community labels. The notion of local dominance and the associated asymmetric relations between nodes are not restricted to community detection, and can be utilised in clustering problems, as we illustrate on networks derived from vector data.</p>
-<img src="fig\abstract.png" alt="abstract" style="zoom:25%;" />
+<img src="fig\abstract.png" alt="abstract" style="zoom:100%;" />
 
 ## Requirements
 
-The codebase is implemented in Python 3.9.1. The version of packages used in the codebase are listed below.
+The codebase was implemented in Python 3.9.1. The version of packages used in the codebase are listed below.
 
 ```
 networkx          2.7
@@ -55,7 +55,7 @@ For a multi-scale network, the first level of the partition comprise four large 
 >>>hierarchical_degree_communities(MSG, 4, auto_choose_centers=False, maximum_tree=True, seed=seed)
 ```
 
-<img src="fig\example2.png" alt="example2" style="zoom: 50%;" />
+<img src="fig\example2.png" alt="example2" style="zoom: 25%;" />
 
 <img src="fig\example3.png" alt="example3" style="zoom:50%;" />
 

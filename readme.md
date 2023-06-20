@@ -2,7 +2,7 @@
 
 # Local dominance unveils clusters in networks
 
-Codes developed in our paper "Local dominance unveils clusters in networks" are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared many drawing and analysis methods in other .py file. 
+Codes developed in our paper "Local dominance unveils clusters in networks" are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py file. 
 
 ## Abstract
 
@@ -17,10 +17,10 @@ The codebase is implemented in Python 3.9.1. The version of packages used in the
 ```
 networkx        	2.7
 numpy           	1.19.5
-pandas 				1.4.2
-scipy				1.8
-matplotlib			3.4.3
-python-louvain		0.16
+pandas 				    1.4.2
+scipy				      1.8
+matplotlib			  3.4.3
+python-louvain    0.16
 ```
 
 ## Datasets
@@ -47,7 +47,7 @@ python
 
 ## Example
 
-<img src="fig\example1.png" alt="example1" style="zoom:50%;" />
+<img src="fig\example1.png" alt="example1" style="zoom:25%;" />
 
 For a multi-scale network, the first level of the partition comprise four large communities:
 

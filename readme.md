@@ -15,11 +15,11 @@ Clusters or communities can provide a coarse-grained description of complex syst
 The codebase is implemented in Python 3.9.1. The version of packages used in the codebase are listed below.
 
 ```
-networkx        	2.7
-numpy           	1.19.5
-pandas 				    1.4.2
-scipy				      1.8
-matplotlib			  3.4.3
+networkx          2.7
+numpy             1.19.5
+pandas            1.4.2
+scipy             1.8
+matplotlib        3.4.3
 python-louvain    0.16
 ```
 

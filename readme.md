@@ -48,9 +48,9 @@ python
 ## Example
 
 <p float="left">
-<img src="fig\example1.png" alt="example1"  width="500" height="500" />
+<img src="fig\example1.png" alt="example1"  width="500" />
 
-<img src="fig\example3.png" alt="example3"  width="500" height="500" />
+<img src="fig\example3.png" alt="example3"  width="500" />
 </p>
 
 For a multi-scale network, there is a notable gap between first four local leaders and the other twelve ones in the decision graph (see above), setting the number of communities (i.e., the parameter "leaders_num") as four yields the first level partition that comprise four large communities:
@@ -92,13 +92,13 @@ Note: The number of communities can be explicitly set according to the results i
 if multi-scale community structure is of interests
 ```
 
-<img src="fig\quick_run.png" alt="quick_run"  width="500" height="500" />
+<img src="fig\quick_run.png" alt="quick_run"  width="500" />
 
 ```
 The original vector data (stars correspond to identified centers):
 ```
 
-<img src="fig\quick_run1.png" alt="quick_run1"  width="500" height="500" />
+<img src="fig\quick_run1.png" alt="quick_run1"  width="500" />
 
 
 

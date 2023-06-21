@@ -47,9 +47,11 @@ python
 
 ## Example
 
-<img src="fig\example1.png" alt="example1"  width="200" height="200" />
+<p float="left">
+<img src="fig\example1.png" alt="example1"  width="400" height="400" />
 
-<img src="fig\example3.png" alt="example3"  width="200" height="200" />
+<img src="fig\example3.png" alt="example3"  width="400" height="400" />
+</p>
 
 For a multi-scale network, there is a notable gap between first four local leaders and the other twelve ones in the decision graph (see above), setting the number of communities (i.e., the parameter "leaders_num") as four yields the first level partition that comprise four large communities:
 

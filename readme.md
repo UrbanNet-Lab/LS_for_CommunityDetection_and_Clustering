@@ -49,15 +49,20 @@ python
 
 <img src="fig\example1.png" alt="example1" style="zoom:25%;" />
 
-For a multi-scale network, the first level of the partition comprise four large communities:
+<img src="fig\example3.png" alt="example3" style="zoom:50%;" />
+
+For a multi-scale network, there is a notable gap between first four local leaders and the other twelve ones in the decision graph (see above), setting the number of communities (i.e., the parameter "leaders_num") as four yields the first level partition that comprise four large communities:
 
 ```
 >>>hierarchical_degree_communities(MSG, 4, auto_choose_centers=False, maximum_tree=True, seed=seed)
 ```
 
-<img src="fig\example2.png" alt="example2" style="zoom: 25%;" />
+If specifying the number of communities as sixteen, the obtained second level parititon comprises sixteen small communities:
 
-<img src="fig\example3.png" alt="example3" style="zoom:50%;" />
+```
+>>>hierarchical_degree_communities(MSG, 16, auto_choose_centers=False, maximum_tree=True, seed=seed)
+```
+
 
 ## A Quick Run
 

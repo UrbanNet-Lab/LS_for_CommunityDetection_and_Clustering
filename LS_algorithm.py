@@ -2,16 +2,13 @@
 """
 Created on Tue Dec 21 11:00:36 2021
 
-Produces Degree Hierarchy Tree from a network
+Ref: 
+Fan Shang, Dingyi Shi, Bingsheng Chen, Paul Expert, Linyuan Lv, H. Eugene Stanley, Renaud Lambiotte, Tim S. Evans, Ruiqi Li, 
+Local dominance unveils clusters in networks, 2022, arXiv: 2205.08118
 
-Based on
-Hidden directionality unifies community detection and cluster analysis
+"Hidden directionality unifies community detection and cluster analysis"
 
-Fan Shang, Bingsheng Chen, Linyuan Lü, H. Eugene Stanley, Ruiqi Li
-
-Implementation and interpreation by Tim Evans (Imperial)
-
-@author: tseva
+@authors: Fan Shang & Tim S. Evans & Ruiqi Li & Dingyi Shi
 """
 
 

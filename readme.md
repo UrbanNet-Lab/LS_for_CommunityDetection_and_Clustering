@@ -2,25 +2,25 @@
 
 # Local dominance unveils clusters in networks
 
-Codes developed in our paper "Local dominance unveils clusters in networks" are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared many drawing and analysis methods in other .py file. 
+Codes developed in our paper "Local dominance unveils clusters in networks" (https://arxiv.org/abs/2209.15497) are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py file. 
 
 ## Abstract
 
 <p align="justify">
 Clusters or communities can provide a coarse-grained description of complex systems at multiple scales, but their detection remains challenging in practice. Community detection methods often define communities as dense subgraphs, or subgraphs with few connections in-between, via concepts such as the cut, conductance, or modularity. Here we consider another perspective built on the notion of local dominance, where low-degree nodes are assigned to the basin of influence of high degree nodes, and design an efficient algorithm based on local information. Local dominance gives rises to community centers, and uncovers local hierarchies in the network. Community centers have a larger degree than their neighbors and are sufficiently distant from other centers. The strength of our framework is demonstrated on synthesized and empirical networks with ground-truth community labels. The notion of local dominance and the associated asymmetric relations between nodes are not restricted to community detection, and can be utilised in clustering problems, as we illustrate on networks derived from vector data.</p>
-![image-20230618222528749](fig\abstract.png)
+<img src="fig\abstract.png" alt="abstract" style="zoom:100%;" />
 
 ## Requirements
 
-The codebase is implemented in Python 3.9.1. The version of packages used in the codebase are listed below.
+The codebase was implemented in Python 3.9.1. The version of packages used in the codebase are listed below.
 
 ```
-networkx        	2.7
-numpy           	1.19.5
-pandas 				1.4.2
-scipy				1.8
-matplotlib			3.4.3
-python-louvain		0.16
+networkx          2.7
+numpy             1.19.5
+pandas            1.4.2
+scipy             1.8
+matplotlib        3.4.3
+python-louvain    0.16
 ```
 
 ## Datasets
@@ -47,17 +47,24 @@ python
 
 ## Example
 
-<img src="fig\example1.png" alt="example1" style="zoom:50%;" />
+<p float="left">
+<img src="fig\example1.png" alt="example1"  width="500" />
 
-For a multi-scale network, the first level of the partition comprise four large communities:
+<img src="fig\example3.png" alt="example3"  width="500" height="475" />
+</p>
+
+For a multi-scale network, there is a notable gap between first four local leaders and the other twelve ones in the decision graph (see above), setting the number of communities (i.e., the parameter "leaders_num") as four yields the first level partition that comprise four large communities:
 
 ```
 >>>hierarchical_degree_communities(MSG, 4, auto_choose_centers=False, maximum_tree=True, seed=seed)
 ```
 
-<img src="fig\example2.png" alt="example2" style="zoom: 50%;" />
+If specifying the number of communities as sixteen, the obtained second level parititon comprises sixteen small communities:
 
-<img src="fig\example3.png" alt="example3" style="zoom:50%;" />
+```
+>>>hierarchical_degree_communities(MSG, 16, auto_choose_centers=False, maximum_tree=True, seed=seed)
+```
+
 
 ## A Quick Run
 
@@ -85,13 +92,13 @@ Note: The number of communities can be explicitly set according to the results i
 if multi-scale community structure is of interests
 ```
 
-<img src="fig\quick_run.png" alt="quick_run" style="zoom: 67%;" />
+<img src="fig\quick_run.png" alt="quick_run"  width="500" />
 
 ```
 The original vector data (stars correspond to identified centers):
 ```
 
-<img src="fig\quick_run1.png" alt="quick_run1" style="zoom:67%;" />
+<img src="fig\quick_run1.png" alt="quick_run1"  width="500" />
 
 
 

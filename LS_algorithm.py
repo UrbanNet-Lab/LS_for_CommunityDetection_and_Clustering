@@ -139,7 +139,7 @@ def full_degree_hierarchy_dag_OLD(G):
     print("! With "+str(G.number_of_nodes())+" nodes, from "+str(G.number_of_edges())+" to "+str(D.number_of_edges())+" edges in Full Degree DAG")
     return D        
 
-def full_degree_hierarchy_dag(G):
+def full_degree_hierarchy_dag(G,selfloop_nodes=None):
     '''
     Create a full degree hierarchy DAG from  networkx graph G
     
@@ -158,6 +158,8 @@ def full_degree_hierarchy_dag(G):
     D.add_nodes_from(G)
     for v in G.nodes:
         kv=G.degree(v)
+        if v in selfloop_nodes:
+            kv+=1
         e_list = [(v,nn) for nn in G.neighbors(v) if G.degree(nn)>kv]  # point to larger degree node
         D.add_edges_from( e_list ) 
     
@@ -165,7 +167,7 @@ def full_degree_hierarchy_dag(G):
     
     return D        
 
-def max_degree_hierarchy_dag(G):
+def max_degree_hierarchy_dag(G,selfloop_nodes=None):
     '''
     Create a maximum degree hierarchy DAG from  networkx graph G
 
@@ -189,7 +191,13 @@ def max_degree_hierarchy_dag(G):
     D = nx.DiGraph()
     D.add_nodes_from(G)
     for v in G.nodes:    
-        degree_list = [G.degree(nn) for nn in G.neighbors(v)]
+        # degree_list = [G.degree(nn) for nn in G.neighbors(v)]
+        degree_list = []
+        for nn in G.neighbors(v):
+            if nn in selfloop_nodes:
+                degree_list.append(G.degree(nn)+1)
+            else:
+                degree_list.append(G.degree(nn))
         if len(degree_list) > 0:
             knnmax = max(degree_list)
             if knnmax >= G.degree[v]:
@@ -203,7 +211,7 @@ def max_degree_hierarchy_dag(G):
 #     print(D.edges())
     return D
 
-def degree_hierarchy_random_tree(G, maximum_tree=True, random_seed=None):
+def degree_hierarchy_random_tree(G, maximum_tree=True, random_seed=None,selfloop_nodes=None):
     '''
     Create a degree hierarchy tree from  networkx graph G.
     
@@ -228,9 +236,9 @@ def degree_hierarchy_random_tree(G, maximum_tree=True, random_seed=None):
         random.seed(random_seed)
     
     if maximum_tree:
-        D=max_degree_hierarchy_dag(G)
+        D=max_degree_hierarchy_dag(G,selfloop_nodes)
     else:
-        D=full_degree_hierarchy_dag(G)
+        D=full_degree_hierarchy_dag(G,selfloop_nodes)
     
     node_queue = Queue(maxsize=0)
     # start queue for DFS from all the root nodes
@@ -272,7 +280,7 @@ def degree_hierarchy_random_tree(G, maximum_tree=True, random_seed=None):
     return D, tree_edge_list        
  
 
-def hierarchical_degree_communities(G, center_num=1, auto_choose_centers=False, maximum_tree=True, seed=None):
+def hierarchical_degree_communities(G, center_num=1, auto_choose_centers=False, maximum_tree=True, seed=None, self_loop=False):
     '''
     Produces hierarchical degree forest (HDF) of trees and hence communities.
     
@@ -281,12 +289,23 @@ def hierarchical_degree_communities(G, center_num=1, auto_choose_centers=False, 
     G -- simple graph for which communities are required
     maximum_tree=True -- If true uses maximum dgree DAG as input, otherwise uses full degree DAG 
     seed=None -- an integers to use as a seed to break ties at random.  Use None to remove random element
+    self_loop -- If true means the self-loop makes sense
     
     Output
     ------
     On screen statistics of communities
     
     '''
+    selfloop_edges=[]
+    if nx.number_of_selfloops(G) > 0:
+        selfloop_edges = list(nx.selfloop_edges(G))
+        G.remove_edges_from(selfloop_edges)
+    selfloop_nodes=[]
+    for item in selfloop_edges:
+        selfloop_nodes.append(item[0])
+    if self_loop==False:
+        selfloop_nodes = []
+
     start_time = datetime.now()
     treename="Hierarchical Maximum Degree Forest"
     treeabv="HMDF"
@@ -297,7 +316,7 @@ def hierarchical_degree_communities(G, center_num=1, auto_choose_centers=False, 
     # print ("\n===== "+treename+" seed "+str(seed)+" =====")
     print("\n====Local Search Algorithm (random seed " +str(seed) +")==========")
     print("Network: "+str(len(G.nodes))+" nodes,"+str(len(G.edges))+" edges")
-    D, tree_edge_list = degree_hierarchy_random_tree(G, maximum_tree=maximum_tree, random_seed=seed)
+    D, tree_edge_list = degree_hierarchy_random_tree(G, maximum_tree=maximum_tree, random_seed=seed,selfloop_nodes=selfloop_nodes)
     # print("With "+str(G.number_of_nodes())+" nodes, now left with "+str(len(tree_edge_list))+" edges in tree" )
     
     # Now find all the nodes with the same root node, i.e. communities

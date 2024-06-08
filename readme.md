@@ -2,7 +2,7 @@
 
 # Local dominance unveils clusters in networks
 
-Codes developed in our paper "Local dominance unveils clusters in networks" (https://arxiv.org/abs/2209.15497) are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py file. 
+Codes developed in our paper "Local dominance unveils clusters in networks, Communications Physics, 2024, 7: 170" [PDF: https://rdcu.be/dJxY0] are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py files. 
 
 ## Abstract
 
@@ -25,7 +25,7 @@ python-louvain    0.16
 
 ## Datasets
 
-In our paper (https://arxiv.org/abs/2209.15497), the LS algorithm is tested on typical networks with ground-truth community labels (e.g., Zachary Karate Club, Football, Polbooks, Polblogs, Cora, Citeseers, PubMed) and networks constructed from vector data (which includes typical 2D benchmark vector data: Flame, Spiral, Aggregation, R15, Blobs, Circles, and Moons; High-dimensional vector data: Iris, Wine, MINST, and Olivetti).
+In our paper, the LS algorithm is tested on typical networks with ground-truth community labels (e.g., Zachary Karate Club, Football, Polbooks, Polblogs, Cora, Citeseers, PubMed) and networks constructed from vector data (which includes typical 2D benchmark vector data: Flame, Spiral, Aggregation, R15, Blobs, Circles, and Moons; High-dimensional vector data: Iris, Wine, MINST, and Olivetti).
 
 ## Usage
 
@@ -37,12 +37,12 @@ python
 >>>hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
 ```
 
-If you want to set the number of communities to explore the multi-scale community structure, then you can specify the number of communities at the second input parameter, the upper limit of which equals the number of local leaders (see Fig.3 in the main text):
+If you want to set the number of communities to explore the multi-scale community structure, which also can be common in real networks, then you can specify the number of communities at the second input parameter, the upper limit of which equals the number of local leaders (see Fig.3b,e in the main text):
 
 ```
 python
 >>>from LS_algorithm import hierarchical_degree_communities
->>>hierarchical_degree_communities(G, leaders_num, auto_choose_centers=False, maximum_tree=True, seed=seed)
+>>>hierarchical_degree_communities(G, center_num=leaders_num, auto_choose_centers=False, maximum_tree=True, seed=seed)
 ```
 
 ## Example
@@ -68,7 +68,7 @@ If specifying the number of communities as sixteen, the obtained second level pa
 
 ## A Quick Run
 
-To better illustrate the process of clustering vector data, we use the challenging vector data presented in paper (https://www.science.org/doi/full/10.1126/sciadv.aax3770) as an example. The network **G** feed to our LS algorithm is constructed via $\epsilon$-ball method with help from percolation theory in complex networks (via calling subroutine LS_cluster_function.py), which determines the distance threshold for $\epsilon$. Then, we can call LS algorithm to obtain the decision graph and corresponding clustering results (with centers highlighted as stars); If you want to explore the multi-scale community structure, the number of communities can be hinted in the decision graph (the upper limit of the number of communities is no greater than the number of local leaders). 
+To better illustrate the process of clustering vector data, we use the challenging vector data presented in paper as an example. The network **G** feed to our LS algorithm is constructed via $\epsilon$-ball method with help from percolation theory in complex networks (via calling subroutine LS_cluster_function.py), which determines the distance threshold for $\epsilon$. Then, we can call LS algorithm to obtain the decision graph and corresponding clustering results (with centers highlighted as stars); If you want to explore the multi-scale community structure, the number of communities can be hinted in the decision graph (the upper limit of the number of communities is no greater than the number of local leaders). 
 
 For a quick run:  
 

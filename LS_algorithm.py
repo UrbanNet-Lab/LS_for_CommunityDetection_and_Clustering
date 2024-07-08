@@ -431,17 +431,20 @@ def hierarchical_degree_communities(G, center_num=None, auto_choose_centers=Fals
 if __name__ == '__main__':
     print("### Simple (extreme) example of network where this method does not produce a unique community ###")    
     G=nx.Graph()
-	#G.add_edges_from(EdgeList)
-	# load the network data 
+    #G.add_edges_from(EdgeList)
+    # load the network data 
     G.add_edges_from([ (0,2), (0,3), (0,4), (0,5), (1,2), (1,3), (1,4), (1,5) ])  #here is a simple example
-	
+
+    # if loading network from files, the network data from files, the id of nodes need to be digits, for example, if reading .gml, "label='id'" is required, which should be
+    # G = nx.read_gml('data_name', label='id')
+
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
     #hierarchical_degree_communities(G, maximum_tree=False, seed=seed)
     print('If there is multi-scale community structure, you can type the number of communities:')
     nc = int(input())
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
 
-	# Other examples 
+    # Other examples 
     print("\n\n  ### Karate Club Network ###")    
     G=nx.karate_club_graph()
-	hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
+    hierarchical_degree_communities(G, maximum_tree=True, seed=seed)

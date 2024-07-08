@@ -36,6 +36,12 @@ python
 >>>from LS_algorithm import hierarchical_degree_communities
 >>>hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
 ```
+When loading the network data from files, the id of nodes need to be digits, for example, if reading .gml, "label='id'" is required, which should be
+```
+python
+>>>G = nx.read_gml('data_name', label='id')
+```
+
 
 If you want to set the number of communities to explore the multi-scale community structure, which also can be common in real networks, then you can specify the number of communities at the second input parameter, the upper limit of which equals the number of local leaders (see Fig.3b,e in the main text):
 

@@ -24,7 +24,7 @@ from matplotlib.ticker import MultipleLocator
 import matplotlib.colors as mc
 import colorsys
 from LS_other_function import plot_combination
-
+np.set_printoptions(threshold = np.inf)
 
 def max_degree_hierarchy_dag(G,selfloop_nodes=None):
     '''
@@ -308,6 +308,7 @@ def hierarchical_degree_communities(G, center_num=None, auto_choose_centers=Fals
 	
     # determine centers from root_to_node
     # (1). using Local-BFS to determine the hidden directionalilty of each local leader (i.e., finding its superior among local leaders along the hierarchy & calculate shortest path lengh between it and its superior l_i  #通过local-BFS计算local leader的指向和最短路径
+    root_to_node = {key: value for key, value in root_to_node.items() if len(value) > 1}
     Potential_Center = list(root_to_node.keys())
     # print("! Number of Communities (root nodes) found "+str(len(root_to_node)))
     # print("  Root Nodes: ",Potential_Center)
@@ -337,6 +338,10 @@ def hierarchical_degree_communities(G, center_num=None, auto_choose_centers=Fals
             node_plot[n] = [D.nodes[n]['parentnode'],1,G.degree[n]]
     root_array = np.array(list(node_plot.values())) 
 #     print('degree, path',root_array[:,2],root_array[:,1])
+#     print(root_array)
+    root_array[root_array[:,2]<=1, 1]=1  #Set l_i=1 for nodes whose degree k_i=1 ###
+    # print('*****************')
+    # print(root_array)
     degree = get_indicator_rank(root_array[:,2])
     shortest_path = get_square(root_array[:,1])
     degree_standard = standard_data(np.array(degree))
@@ -358,19 +363,21 @@ def hierarchical_degree_communities(G, center_num=None, auto_choose_centers=Fals
     if not center_num:
         center_num = len(root_to_node) 
     center_dcd = []
+    # for i in multi_sort[:center_num]:
+    #     center_dcd.append(int(i[0]))
+    # print(multi_sort)
+    local_cnt = 0
+    # for i in multi_sort[:,1]:
     for i in multi_sort[:center_num]:
-        center_dcd.append(int(i[0]))
-    
+        if i[1]>0:
+            local_cnt+=1
+            center_dcd.append(int(i[0]))
+    print("The number of local leaders: "+str(local_cnt))
     # saving related data for visualization  #保存绘图需要的数据
     plot_combination_data = [root_array[:,2],root_array[:,1],nodeid, multi_x, multi_sort[:,1],multi_sort[:,0],center_dcd]
     plot_process_degree_shortpath_data = [degree,shortest_path,nodeid]
 
-    local_cnt = 0
-    for i in multi_sort[:,1]:
-        if i>0:
-            local_cnt+=1
-    print("The number of local leaders: "+str(local_cnt))
-    
+
     #(3). For local leaders, record their superior along the hierarchy in the DAG
     for node in root_to_node.keys():
         D.nodes[node]["parentnode"] = root_decision[node][0]
@@ -433,19 +440,18 @@ if __name__ == '__main__':
     G=nx.Graph()
     #G.add_edges_from(EdgeList)
     # load the network data 
-    G.add_edges_from([ (0,2), (0,3), (0,4), (0,5), (1,2), (1,3), (1,4), (1,5) ])  #here is a simple example
+    # G.add_edges_from([ (0,2), (0,3), (0,4), (0,5), (1,2), (1,3), (1,4), (1,5) ])  #here is a simple example
 
     # if loading network from files, the network data from files, the id of nodes need to be digits, for example, if reading .gml, "label='id'" is required, which should be
-    # G = nx.read_gml('data_name', label='id')
-
-    seed = 163 # can be set as any value
+    G = nx.read_gml(r'D:\baite\文件夹\UrbanNet\高维小样本数据\GEO\PDAC_1.31.gml', label='id')
+    seed = 1
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
     #hierarchical_degree_communities(G, maximum_tree=False, seed=seed)
-    print('If there is multi-scale community structure, you can type the number of communities:')
-    nc = int(input())
-    hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
+    # print('If there is multi-scale community structure, you can type the number of communities:')
+    # nc = int(input())
+    # hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
 
-    # Other examples 
-    #print("\n\n  ### Karate Club Network ###")    
-    #G=nx.karate_club_graph()
-    #hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
+    # # Other examples
+    # print("\n\n  ### Karate Club Network ###")
+    # G=nx.karate_club_graph()
+    # hierarchical_degree_communities(G, maximum_tree=True, seed=seed)

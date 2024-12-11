@@ -443,13 +443,13 @@ if __name__ == '__main__':
     # G.add_edges_from([ (0,2), (0,3), (0,4), (0,5), (1,2), (1,3), (1,4), (1,5) ])  #here is a simple example
 
     # if loading network from files, the network data from files, the id of nodes need to be digits, for example, if reading .gml, "label='id'" is required, which should be
-    G = nx.read_gml(r'D:\baite\文件夹\UrbanNet\高维小样本数据\GEO\PDAC_1.31.gml', label='id')
-    seed = 1
+    G = nx.read_gml(r'data/network_with_true_community_labels/cora.gml', label='id')
+    seed = 163 # it can be any value
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
     #hierarchical_degree_communities(G, maximum_tree=False, seed=seed)
-    # print('If there is multi-scale community structure, you can type the number of communities:')
-    # nc = int(input())
-    # hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
+    print('If there is multi-scale community structure, you can type the number of communities:')
+    nc = int(input())
+    hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
 
     # # Other examples
     # print("\n\n  ### Karate Club Network ###")

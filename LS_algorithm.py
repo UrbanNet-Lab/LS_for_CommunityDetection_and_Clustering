@@ -438,6 +438,7 @@ if __name__ == '__main__':
     # if loading network from files, the network data from files, the id of nodes need to be digits, for example, if reading .gml, "label='id'" is required, which should be
     # G = nx.read_gml('data_name', label='id')
 
+    seed = 163 # can be set as any value
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
     #hierarchical_degree_communities(G, maximum_tree=False, seed=seed)
     print('If there is multi-scale community structure, you can type the number of communities:')
@@ -445,6 +446,6 @@ if __name__ == '__main__':
     hierarchical_degree_communities(G, maximum_tree=True, seed=seed, center_num=nc)
 
     # Other examples 
-    print("\n\n  ### Karate Club Network ###")    
-    G=nx.karate_club_graph()
-    hierarchical_degree_communities(G, maximum_tree=True, seed=seed)
+    #print("\n\n  ### Karate Club Network ###")    
+    #G=nx.karate_club_graph()
+    #hierarchical_degree_communities(G, maximum_tree=True, seed=seed)

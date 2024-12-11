@@ -363,9 +363,6 @@ def hierarchical_degree_communities(G, center_num=None, auto_choose_centers=Fals
     if not center_num:
         center_num = len(root_to_node) 
     center_dcd = []
-    # for i in multi_sort[:center_num]:
-    #     center_dcd.append(int(i[0]))
-    # print(multi_sort)
     local_cnt = 0
     # for i in multi_sort[:,1]:
     for i in multi_sort[:center_num]:

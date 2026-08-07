@@ -3,6 +3,7 @@
 # Local dominance unveils clusters in networks
 
 Codes developed in our paper "Local dominance unveils clusters in networks, Communications Physics, 2024, 7: 170" [PDF: https://rdcu.be/dJxY0] are stored here. Our "Local Search" algorithm is in **LS_algorithm.py**. And we prepared related visualization and analysis methods in other .py files. 
+The LS algorithm has also been integrated into EasyGraph (https://github.com/easy-graph/Easy-Graph/blob/pybind11/easygraph/functions/community/localsearch.py; https://easy-graph.github.io/docs/index.html; https://mp.weixin.qq.com/s/PnqZQVPKJfp9gCfAFGn6tA).
 
 ## Abstract
 
